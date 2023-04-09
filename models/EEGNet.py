@@ -21,8 +21,8 @@ class EEGNet(nn.Module):
         self.drpout = nn.Dropout(p=prob)
         self.avgPool2 = nn.AvgPool2d(kernel_size=(1, 8), stride=(1, 8))
 
-        # FC Layer
-        self.fc = nn.Linear(in_features=736, out_features=2, bias=True)
+        # classify
+        self.clf = nn.Linear(in_features=736, out_features=2, bias=True)
 
     def forward(self, x):
         # Layer 1
@@ -43,9 +43,9 @@ class EEGNet(nn.Module):
         x = self.avgPool2(x)
         x = self.drpout(x)
 
-        # FC Layer
+        # classify
         x = x.view(x.shape[0], -1)
-        x = self.fc(x)
+        x = self.clf(x)
 
         return x
         
