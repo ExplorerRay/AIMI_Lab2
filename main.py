@@ -44,11 +44,11 @@ def plot_train_acc(train_acc_list, epochs):
 
 def plot_train_loss(train_loss_list, epochs):
     epoch_list = []
-    for e in range(1,len(train_acc_list)+1):
+    for e in range(1,len(train_loss_list)+1):
         epoch_list.append(e)
 
     plt.title('Training loss')
-    plt.plot(epoch_list, train_acc_list, label='train loss')
+    plt.plot(epoch_list, train_loss_list, label='train loss')
     plt.xlabel('epoch number')
     plt.ylabel('loss')
     plt.legend()
@@ -160,3 +160,10 @@ if __name__ == '__main__':
     plot_train_acc(train_acc_list, args.num_epochs)
     plot_train_loss(train_loss_list, args.num_epochs)
     plot_test_acc(test_acc_list, args.num_epochs)
+
+    best=0
+    for epo in range(len(test_acc_list)):
+        if test_acc_list[epo]>best:
+            best=test_acc_list[epo]
+            rc_epo = epo
+    print("best test accuracy:", best, "in", rc_epo, "epoch")
