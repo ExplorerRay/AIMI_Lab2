@@ -29,16 +29,46 @@ class BCIDataset(Dataset):
         return self.data.shape[0]
 
 def plot_train_acc(train_acc_list, epochs):
-    # TODO plot training accuracy
-    pass
+    epoch_list = []
+    for e in range(1,len(train_acc_list)+1):
+        epoch_list.append(e)
+
+    plt.title('Training accuracy')
+    plt.plot(epoch_list, train_acc_list, label='train acc')
+    plt.xlabel('epoch number')
+    plt.ylabel('acc (%)')
+    plt.legend()
+    plt.savefig('tr_acc.png')
+    plt.show()
+    plt.clf()
 
 def plot_train_loss(train_loss_list, epochs):
-    # TODO plot training loss
-    pass
+    epoch_list = []
+    for e in range(1,len(train_acc_list)+1):
+        epoch_list.append(e)
+
+    plt.title('Training loss')
+    plt.plot(epoch_list, train_acc_list, label='train loss')
+    plt.xlabel('epoch number')
+    plt.ylabel('loss')
+    plt.legend()
+    plt.savefig('tr_los.png')
+    plt.show()
+    plt.clf()
 
 def plot_test_acc(test_acc_list, epochs):
-    # TODO plot testing loss
-    pass
+    epoch_list = []
+    for e in range(1,len(test_acc_list)+1):
+        epoch_list.append(e)
+
+    plt.title('Testing accuracy')
+    plt.plot(epoch_list, test_acc_list, label='test acc')
+    plt.xlabel('epoch number')
+    plt.ylabel('acc (%)')
+    plt.legend()
+    plt.savefig('tst_acc.png')
+    plt.show()
+    plt.clf()
 
 def train(model, loader, criterion, optimizer, args):
     best_acc = 0.0
