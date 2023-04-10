@@ -7,6 +7,8 @@ class EEGNet(nn.Module):
         # Layer 1
         self.conv1 = nn.Conv2d(1, 16, kernel_size=(1, 51), stride=(1, 1), padding=(0, 25), bias=False)
         self.bn1 = nn.BatchNorm2d(16, affine=True, track_running_stats=True)
+        #self.activation0 = nn.ELU(alpha=alp)
+        #self.avgPool0 = nn.AvgPool2d(kernel_size=(1, 4), stride=(1, 4))
 
         # Layer 2
         self.depthwiseConv2 = nn.Conv2d(16, 32, kernel_size=(2, 1), stride=(1, 1), groups=16, bias=False)
@@ -23,11 +25,14 @@ class EEGNet(nn.Module):
 
         # classify
         self.clf = nn.Linear(in_features=736, out_features=2, bias=True)
+        #self.clf = nn.Linear(in_features=160, out_features=2)
 
     def forward(self, x):
         # Layer 1
         x = self.conv1(x)
         x = self.bn1(x)
+        #x = self.activation0(x)
+        #x = self.avgPool0(x)
 
         # Layer 2
         x = self.depthwiseConv2(x)
